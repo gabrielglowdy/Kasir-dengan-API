@@ -1,9 +1,9 @@
-<div class="card-body bg-white" style="height:99vh; width:180pt;">
+<div class="card-body bg-white shadow" style="height:100vh;">
     <div class="row mb-2">
         <div class="col-12 text-center">
             <a href="/order/new" class="">
                 <div class="bulat card-body py-3 shadow-sm">
-                    <div class="row align-item-content px-2">
+                    <div class="row align-item-content px-1">
                         <div class="col-3 align-item-content px-0 text-center">
                             <img src="{{asset('img/create.png')}}" alt="" srcset="" style="width:24px; object-fit:scale-down;">
                         </div>

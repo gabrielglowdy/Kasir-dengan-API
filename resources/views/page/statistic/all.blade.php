@@ -34,7 +34,7 @@
                             data: {
                             labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
                             datasets: [{
-                                label: 'Produk terjual',
+                                label: 'Jumlah Transaksi',
                                 fill : false,
                                 data: [
                                     <?php foreach($jumlahTransaksi as $value){
@@ -121,6 +121,41 @@
                                 ]
                             },
                         });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 my-3">
+        <div class="bg-white bulat card-body">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Statistik Produk Terjual</h2>
+                </div>
+                <div class="col-12">
+                    <canvas id="produkTerjual" height="200"></canvas>
+                    <script defer>
+                        var ctk = document.getElementById('produkTerjual');
+                            var color = getComputedStyle(document.querySelector('.text-primary')).color;
+                            var myChart2 = new Chart(ctk, {
+                                type: 'line',
+                                data: {
+                                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                                datasets: [{
+                                    label: 'Produk terjual',
+                                    fill : false,
+                                    data: [
+                                        <?php foreach($jumlahProduk as $value){
+                                            echo $value. ', ';
+                                        }?>
+                                    ]
+                                    ,
+                                    backgroundColor: color,
+                                    borderColor:  color,
+                                    borderWidth: 1
+                                }]
+                                },
+                            });
                     </script>
                 </div>
             </div>

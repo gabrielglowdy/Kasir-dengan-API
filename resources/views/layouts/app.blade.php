@@ -28,12 +28,11 @@
             <div class="col-12">
                 @include('layouts.navbar')
             </div>
-            <div class="sidenav pt-5">
-                @include('layouts.sidebar')
-            </div>
-            <div class="col-md-2 mt-5">
-            </div>
-            <div class="col-md-9 pb-4 pt-5 mt-5 just=">
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-9 pb-4 pt-5 mt-5 ">
                 <main>
                     @yield('content')
                 </main>

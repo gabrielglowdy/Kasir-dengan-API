@@ -35,6 +35,7 @@
                             <td>{{$value->subtotal}}</td>
                         </tr>
                         @endforeach
+                        @if(config('app.ppn',10) > 0)
                         <tr>
                             <th colspan="3" class="text-right">Total</th>
                             <td colspan="3">{{$total}}</td>
@@ -47,10 +48,13 @@
                             <th colspan="3" class="text-right">Total + PPN ({{$ppn}}%)</th>
                             <td colspan="3">{{$ppn_total}}</td>
                         </tr>
+                        @endif
+                        @if(config('app.pembulatan', true))
                         <tr>
                             <th colspan="3" class="text-right">Pembulatan</th>
                             <td colspan="3">{{$pembulatan}}</td>
                         </tr>
+                        @endif
                         <tr>
                             <th colspan="3" class="text-right">Total yang harus dibayar</th>
                             <td colspan="3">{{$grandTotal}}</td>
@@ -66,42 +70,42 @@
         <div class="col-md-4 col-11">
             <div class="bulat bg-white card-body">
                 <div class="row">
-                    @for($i=1; $i<=9; $i++) <div class="col-4 px-2 my-3">
+                    @for($i=1; $i<=9; $i++) <div class="col-4 px-2 my-2">
                         <div class="bg-abu bulat card-body text-center"
                             onclick="document.getElementById('bayar').value += '{{$i}}'">
                             <h6 class="mb-0">{{$i}}</h6>
                         </div>
                 </div>
                 @endfor
-                <div class="col-4 px-2 my-3">
+                <div class="col-4 px-2 my-2">
                     <div class="bg-abu bulat card-body text-center"
                         onclick="document.getElementById('bayar').value = document.getElementById('bayar').value.substring(0, document.getElementById('bayar').value.length -1);">
                         <h6 class="mb-0 material-icons">backspace</h6>
                     </div>
                 </div>
-                <div class="col-4 px-2 my-3">
+                <div class="col-4 px-2 my-2">
                     <div class="bg-abu bulat card-body text-center" onclick="zero(1)">
                         <h6 class="mb-2">0</h6>
                     </div>
                 </div>
-                <div class="col-4 px-2 my-3">
+                <div class="col-4 px-2 my-2">
                     <div class="bg-abu bulat card-body text-center"
                         onclick="document.getElementById('bayar').value = '' ">
                         <h6 class="mb-0 material-icons">settings_backup_restore</h6>
                     </div>
                 </div>
-                <div class="col-4 px-2 my-3">
+                <div class="col-4 px-2 my-2">
                     <div class="bg-abu bulat card-body text-center" onclick="zero(2)">
                         <h6 class="mb-0">00</h6>
                     </div>
                 </div>
-                <div class="col-4 px-2 my-3">
+                <div class="col-4 px-2 my-2">
                     <div class="bg-abu bulat card-body text-center"
                         onclick="document.getElementById('bayar').value = '{{$rawGrandTotal}}'">
                         <h6 class="mb-0">PAS</h6>
                     </div>
                 </div>
-                <div class="col-4 px-2 my-3">
+                <div class="col-4 px-2 my-2">
                     <div class="bg-abu bulat card-body text-center" onclick="zero(3)">
                         <h6 class="mb-0">000</h6>
                     </div>

@@ -1,49 +1,45 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
-
 // Variables
 @import "variables";
-
-$asli: #0cd487;
-$theme-colors: (
-  "primary": $asli,
-  "abu" : #F7f7f7
-);
-
+$asli: #0c69d4;
+$theme-colors: ( "primary": $asli,
+"abu": #F7f7f7);
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
-
 .bulat {
-  border-radius: 16pt;
+    border-radius: 16pt;
 }
 
 body,
 html {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .sidenav {
-  height: 100vh;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-top: 20px;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-top: 20px;
 }
 
 body::-webkit-scrollbar,
 .sidenav::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
+
 /* Hide scrollbar for IE and Edge */
+
 body,
 .sidenav {
-  -ms-overflow-style: none;
+    -ms-overflow-style: none;
 }

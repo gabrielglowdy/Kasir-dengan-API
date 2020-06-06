@@ -2,6 +2,10 @@
 
 return [
 
+
+    'ppn' => env('PPN', 10),
+    'pembulatan' => env('PEMBULATAN',true),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

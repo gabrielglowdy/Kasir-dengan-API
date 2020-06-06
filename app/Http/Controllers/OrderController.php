@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-    private $ppn = 10;
+    private $ppn,$bulat;
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +22,14 @@ class OrderController extends Controller
     public function index()
     {
         //
+    }
+
+    public function __construct()
+    {
+        $this->ppn = config('app.ppn', 10);
+        $this->bulat = config('app.pembulatan', true);
+
+
     }
 
     /**
@@ -110,7 +118,7 @@ class OrderController extends Controller
 
         // return $request;
         $jumlah_ppn = ($ppn / 100) * $total;
-        if ($jumlah_ppn + $total > 1000 / 2) {
+        if ($jumlah_ppn + $total > 1000 / 2 && $this->bulat) {
             $bulat = ceil((($jumlah_ppn + $total) / 1000) * 2) / 2 * 1000 - ($jumlah_ppn + $total);
         } else {
             $bulat = 0;
@@ -190,7 +198,7 @@ class OrderController extends Controller
             $lists[$i]->price = 'Rp ' . number_format($lists[$i]->price, 0, ".", ".");
         }
         $jumlah_ppn = ($ppn / 100) * $total;
-        if ($jumlah_ppn + $total > 1000 / 2) {
+        if ($jumlah_ppn + $total > 1000 / 2 && $this->bulat) {
             $bulat = ceil((($jumlah_ppn + $total) / 1000) * 2) / 2 * 1000 - ($jumlah_ppn + $total);
         } else {
             $bulat = 0;

@@ -147,9 +147,14 @@ class ProductController extends Controller
         // return $products;
         foreach ($products as $key => $value) {
             $category = Category::where('id', $value->category)->first();
-            $value->category_name = $category->name;
-            $value->category_id = $category->id;
+            if ($category != null) {
+                $value->category_name = $category->name;
+                $value->category_id = $category->id;
+            }else{
+                $value->delete();
+            }
             $value->price = 'Rp ' . number_format($value->price, 0, ".", ".");
+
         }
         return view('page/product/list')->with(['products' => $products]);
         # code...

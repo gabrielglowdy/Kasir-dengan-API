@@ -41,6 +41,7 @@ class Pages extends Controller
         }
         // return;
         $dataTahun = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        $produkTerjualTahun = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         $uangMasukTahun = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         $dateList = Puchase::whereYear('created_at', '=', $tahun)->distinct()->get();
@@ -48,6 +49,11 @@ class Pages extends Controller
             $bulan =  date('m', strtotime($value->created_at));
             $uangMasukTahun[$bulan - 1] += $value->grand_total;
             $dataTahun[$bulan - 1]++;
+            $productsX = PuchaseList::where('id_purchase',$value->id)->get();
+
+            foreach ($productsX as $perProduct) {
+                $produkTerjualTahun[$bulan-1] += $perProduct->jumlah;
+            }
         }
 
         //terlaris
@@ -58,6 +64,7 @@ class Pages extends Controller
             $jumlah = PuchaseList::where('id_product', $value->id)->whereYear('created_at', '=', $tahun)->distinct()->get();
             $counter = 0;
             $bulanan = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            $bulan = date('m');
             foreach ($jumlah as $key => $val) {
                 $counter += $val->jumlah;
                 $bulan =  date('m', strtotime($val->created_at));
@@ -72,6 +79,7 @@ class Pages extends Controller
         }
 
         $results = array();
+        $results['results'] = array();
         $counter = 0;
         foreach ($products as $key => $value) {
             //Kenapa MaxJumlah/2 ? karena kita mencari produk yang diatas rata rata
@@ -86,11 +94,9 @@ class Pages extends Controller
                 $counter++;
             }
         }
-
-
-
         return view('page/statistic/all')->with([
             'jumlahTransaksi' => $dataTahun,
+            'jumlahProduk' => $produkTerjualTahun,
             'jumlahPendapatan' => $uangMasukTahun,
             'products' => $results['results'],
         ]);

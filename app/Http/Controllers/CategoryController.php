@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    private $otherName = 'Lain-lain';
     /**
      * Display a listing of the resource.
      *
@@ -98,22 +100,29 @@ class CategoryController extends Controller
         $category = Category::where('id', $id)->first();
         //Check Kategori tsb ada atau enggak
         if ($category != null) {
-            //Check produk yang di dalam kategori tersebut
-            $products = Product::where('category', $id)->get();
-            if (count($products) > 0) {
-                //If exist
-                //Check Category 'Other'
-                $otherName = 'Lain-lain';
-                $cat = Category::where('name', $otherName)->first();
-                if ($cat == null) {
-                    $cat = new Category();
-                    $cat->name = $otherName;
-                    $cat->icon = 'svg';
-                    $cat->save();
-                }
-                foreach ($products as $key => $value) {
-                    $value->category = $cat->id;
-                    $value->save();
+            //Check nama kategorinya, jika mau hapus lain lain harus hapus produknya
+            if ($category->name == $this->otherName) {
+                Product::where('category', $id)->delete();
+            }
+            //Else, jika bukan Kategori 'Lain Lain' yang ingin dihapu
+            else {
+                //Check produk yang di dalam kategori tersebut
+                $products = Product::where('category', $id)->get();
+                if (count($products) > 0) {
+                    //If exist
+                    //Check Category 'Other'
+
+                    $cat = Category::where('name', $this->otherName)->first();
+                    if ($cat == null) {
+                        $cat = new Category();
+                        $cat->name = $this->otherName;
+                        $cat->icon = 'svg';
+                        $cat->save();
+                    }
+                    foreach ($products as $key => $value) {
+                        $value->category = $cat->id;
+                        $value->save();
+                    }
                 }
             }
             Category::where('id', $id)->delete();
@@ -123,16 +132,16 @@ class CategoryController extends Controller
 
     public function daftarProduk($id)
     {
-        $category =  Category::where('id',$id)->first();
-        $products = Product::where('category',$id)->get();
-        if (count($products)==0 || $category == null) {
+        $category =  Category::where('id', $id)->first();
+        $products = Product::where('category', $id)->get();
+        if (count($products) == 0 || $category == null) {
             return redirect('/daftar-produk');
         }
         foreach ($products as $key => $value) {
-            $value->category_name = Category::where('id',$value->category)->first()->name;
+            $value->category_name = Category::where('id', $value->category)->first()->name;
             $value->price = 'Rp ' . number_format($value->price, 0, ".", ".");
         }
-        return view('page/category/daftar-produk')->with(['products' => $products, 'category'=> $category]);
+        return view('page/category/daftar-produk')->with(['products' => $products, 'category' => $category]);
         # code...
     }
 
@@ -140,7 +149,7 @@ class CategoryController extends Controller
     {
         $products = Category::all();
         foreach ($products as $key => $value) {
-            $prod = Product::where('category',$value->id)->get();
+            $prod = Product::where('category', $value->id)->get();
             $value->total_produk = count($prod);
         }
         // return $products;
