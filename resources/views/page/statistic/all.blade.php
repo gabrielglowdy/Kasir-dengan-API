@@ -11,14 +11,14 @@
 @section('content')
 
 <div class="row my-3">
-    <div class="col-6">
+    <div class="col-md-6 col-12 text-md-left text-center">
         <h2 class="mb-0">Statistik {{config('app.name','Laravel')}}</h3>
             <p class="text-primary"></p>
     </div>
 
 </div>
-<div class="row pt-3">
-    <div class="col-6 my-3">
+<div class="row pt-3 justify-content-center">
+    <div class="col-md-6 col-11 my-3">
         <div class="bg-white bulat card-body">
             <div class="row">
                 <div class="col-12 text-center">
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 my-3">
+    <div class="col-md-6 col-11 my-3">
         <div class="bg-white bulat card-body">
             <div class="row">
                 <div class="col-12 text-center">
@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 my-3">
+    <div class="col-md-6 col-11 my-3">
         <div class="bg-white bulat card-body">
             <div class="row">
                 <div class="col-12 text-center">
@@ -126,7 +126,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 my-3">
+    <div class="col-md-6 col-11 my-3">
         <div class="bg-white bulat card-body">
             <div class="row">
                 <div class="col-12 text-center">
