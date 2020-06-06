@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', config('app.name', 'Laravel'))</title>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      @yield('css')
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col-12">
+                @include('layouts.navbar')
+            </div>
+            <div class="sidenav pt-5">
+                @include('layouts.sidebar')
+            </div>
+            <div class="col-md-2 mt-5">
+            </div>
+            <div class="col-md-9 pb-4 pt-5 mt-5 just=">
+                <main>
+                    @yield('content')
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+@yield('js')
+</html>
